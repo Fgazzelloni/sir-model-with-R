@@ -9,7 +9,7 @@ embed-resources: true
 #server: shiny
 ---
 
-# Materials for tonight
+# Materials
 
 All materials we need:
 
@@ -19,6 +19,8 @@ All materials we need:
 sir_pkgs <- c("tidyverse","deSolve")
 install.packages(sir_pkgs)
 ```
+
+GitHub Repository: [https://github.com/Fgazzelloni/sir-model-with-R/](https://github.com/Fgazzelloni/sir-model-with-R/)
 
 ::: notes
 Welcome Everyone!
@@ -78,7 +80,7 @@ Define the parameters
 ```{r}
 #| echo: true
 #| eval: false
-N <- 1e6  # Total population
+N <- 1e3  # Total population
 beta <- 0.5  # Transmission rate
 gamma <- 0.1  # Recovery rate
 

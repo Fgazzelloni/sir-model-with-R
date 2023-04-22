@@ -1,6 +1,5 @@
 library(deSolve)
 library(ggplot2)
-library(gganimate)
 
 # Define the SIR model
 sir_model <- function(time, state, parameters) {
