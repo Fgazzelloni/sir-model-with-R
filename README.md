@@ -3,7 +3,7 @@
 This repository is a container of the material for the R-Ladies Rome talk of April 22, 2023. 
 It contains infromation on how to make a deterministic SIR model with R. 
 
-Resources:
+Resources Deterministic & Bayesian modeling:
 
 - [https://desolve.r-forge.r-project.org/](https://desolve.r-forge.r-project.org/)
 - [https://mc-stan.org/cmdstanr/](https://mc-stan.org/cmdstanr/)
