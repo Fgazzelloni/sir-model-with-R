@@ -6,8 +6,6 @@ contributes:
     revealjs:
       logo: logo.png
       footer: |
-        [Custom-R-Ladies](https://rladies.org/) theme for [Quarto Presentations](https://quarto.org/docs/presentations/revealjs/index.html).
-        Code available on [GitHub](https://github.com/beatrizmilz/quarto-rladies-theme).
       theme: rladies.scss
       slide-number: c/t
       show-slide-number: all

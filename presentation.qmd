@@ -3,7 +3,7 @@ title: "Deterministic SIR model with R"
 subtitle: "Federica Gazzelloni<br><br>April 22, 2023"
 format: 
   rladies-revealjs:
-    footer: "[R-Ladies](https://rladies.org/) theme for [Quarto Presentations](https://quarto.org/docs/presentations/revealjs/index.html). Code available on [GitHub](https://github.com/beatrizmilz/quarto-rladies-theme)."
+    footer: "Quarto Presentation"
 incremental: false
 embed-resources: true
 #server: shiny
@@ -20,7 +20,7 @@ sir_pkgs <- c("tidyverse","deSolve")
 install.packages(sir_pkgs)
 ```
 
-GitHub Repository: [https://github.com/Fgazzelloni/sir-model-with-R/](https://github.com/Fgazzelloni/sir-model-with-R/)
+GitHub Repo: [https://github.com/Fgazzelloni/sir-model-with-R/](https://github.com/Fgazzelloni/sir-model-with-R/)
 
 ::: notes
 Welcome Everyone!
