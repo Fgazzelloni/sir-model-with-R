@@ -1,0 +1,143 @@
+---
+title: "Deterministic SIR model with R"
+subtitle: "Federica Gazzelloni<br><br>April 22, 2023"
+format: 
+  rladies-revealjs:
+    footer: "[R-Ladies](https://rladies.org/) theme for [Quarto Presentations](https://quarto.org/docs/presentations/revealjs/index.html). Code available on [GitHub](https://github.com/beatrizmilz/quarto-rladies-theme)."
+incremental: false
+embed-resources: true
+#server: shiny
+---
+
+# Materials for tonight
+
+All materials we need:
+
+```{r}
+#| eval: false
+#| echo: true
+sir_pkgs <- c("tidyverse","deSolve")
+install.packages(sir_pkgs)
+```
+
+::: notes
+Welcome Everyone!
+:::
+
+# Introduction
+
+In this presentation, we will explore how to implement the deterministic SIR model in R, including how to simulate the model, plot the results, and interpret the output.
+
+We will also discuss the assumptions and limitations of the model and how to extend it to more complex scenarios.
+
+So, let's dive in and learn more about the deterministic SIR model in R!
+
+# What is a SIR model? {.smaller}
+
+::: columns
+::: {.column width="70%"}
+-   The SIR model is a mathematical model used to describe the spread of infectious diseases in a population.
+
+-   The model divides the population into three compartments:
+
+    -   susceptible
+    -   infected
+    -   recovered
+
+> The deterministic version of the SIR model assumes that the transmission rate and recovery rate are constant over time and that the population is homogeneous.
+:::
+
+::: {.column width="30%"}
+![](https://media.giphy.com/media/dVuyBgq2z5gVBkFtDc/giphy.gif){width="70%"}
+
+```{r}
+#| out-width: 80%
+source("scripts/animation.R")
+animate(sir_anim, fps = 10, duration = 10)
+```
+:::
+:::
+
+## Modeling infectious diseases {.smaller}
+
+::: panel-tabset
+### Implementation {.smaller}
+
+[![Mathematical transmission model](images/sir-flowchart.png){style="width: 50%" fig-align="center"}](https://mc-stan.org/users/documentation/case-studies/boarding_school_case_study.html#1_simple_sir)
+
+$N$ is the `population`, $S$ the `susceptible`, $I$ the `infected`, $R$ the `recovered.` $\beta$ and $\gamma$ are the parameters, the `transmission rate` and the `recovery rate` respectively, expressed in $day^-1$.
+
+$$\frac{dS}{dt}=-\beta S \frac{I}{N}$$ $$\frac{dI}{dt}= \beta S \frac{I}{N} -\gamma I$$ $$\frac{dR}{dt}= \gamma I$$
+
+
+
+### Code - part one
+
+Define the parameters
+
+```{r}
+#| echo: true
+#| eval: false
+N <- 1e6  # Total population
+beta <- 0.5  # Transmission rate
+gamma <- 0.1  # Recovery rate
+
+dS <- -beta * S * I / N
+dI <- beta * S * I / N - gamma * I
+dR <- gamma * I
+```
+
+Set the initial values and parameters
+
+```{r}
+#| echo: true
+#| eval: false
+init_state <- c(S = 999, I = 1, R = 0)
+parameters <- c(beta = 0.5, 
+                gamma = 0.1, 
+                N = sum(init_state))
+```
+
+### Code - part two
+
+Define the SIR model
+
+```{r}
+#| echo: true
+#| eval: false
+sir_model <- function(time, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    dS <- -beta * S * I / N
+    dI <- beta * S * I / N - gamma * I
+    dR <- gamma * I
+    return(list(c(dS, dI, dR)))})}
+```
+
+Simulate the model
+
+```{r}
+#| echo: true
+#| eval: false
+times <- seq(0, 100, by = 0.1)
+sir_out <- ode(y = init_state, 
+               times = times, 
+               func = sir_model, 
+               parms = parameters)
+```
+
+### Resources {.smaller}
+
+Here are some sources to look at for improving your knowledge about how to make a deterministic SIR model in R:
+
+1.  The `R Epidemics Consortium (RECON)` is a group of researchers and practitioners who develop and apply computational models to understand and control infectious disease outbreaks. They have a GitHub repository with R code for simulating and analyzing SIR models.
+
+2.  The `{EpiModel}` package is an R package for simulating and analyzing stochastic and deterministic epidemic models, including the SIR model. The package includes functions for parameter estimation, sensitivity analysis, and visualization.
+
+3.  The `{deSolve}` package is an R package for solving differential equations, which are commonly used to model dynamic systems such as the SIR model. The package includes functions for solving ordinary differential equations (ODEs) and partial differential equations (PDEs).
+
+4.  The `Epidemic Modeling with R (EMR)` book provides a comprehensive introduction to epidemic modeling with R, including the SIR model. It covers both deterministic and stochastic models, as well as parameter estimation, sensitivity analysis, and model validation.
+:::
+
+# More to know {.smaller}
+
+For example, the SIR (Susceptible-Infected-Recovered) model is a deterministic model that describes the dynamics of the spread of a virus, but it also includes stochastic elements such as random interactions between individuals.

@@ -1,0 +1,4 @@
+- source: presentation.qmd
+  quarto-pub:
+    - id: b67f5489-1409-48be-b470-8b5dd951864f
+      url: 'https://quartopub.com/sites/fgazzelloni/deterministic-sir-model-with-r'
